@@ -1,23 +1,16 @@
-# Compiler and flags
-CXX = g++
-CXXFLAGS = -Iinclude -Wall -g
-
-# Source files
-SRC = src/objPos.cpp src/objPosArrayList.cpp
-TEST_SRC = test/objPosArrayListTest.cpp
+SRC = src/objPos.cpp src/Food.cpp src/objPosArrayList.cpp
+TEST_SRC = test/objPosArrayListTest.cpp test/FoodTest.cpp
 OBJ = $(SRC:.cpp=.o) $(TEST_SRC:.cpp=.o)
 
-# Executable
-EXEC = test_objPosArrayList
+EXEC = test_objPosArrayList test_Food
 
-# Default rule to build the executable
 all: $(EXEC)
 
-$(EXEC): $(OBJ)
-	$(CXX) $(CXXFLAGS) -o $(EXEC) $(OBJ)
+test_objPosArrayList: src/objPos.o src/objPosArrayList.o test/objPosArrayListTest.o
+	$(CXX) $(CXXFLAGS) -o $@ $^
 
-%.o: %.cpp
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+test_Food: src/objPos.o src/Food.o src/objPosArrayList.o test/FoodTest.o
+	$(CXX) $(CXXFLAGS) -o $@ $^
 
 clean:
 	rm -f $(OBJ) $(EXEC)

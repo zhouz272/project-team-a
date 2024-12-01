@@ -16,6 +16,12 @@ int objPos::getX() const { return x; }
 int objPos::getY() const { return y; }
 char objPos::getSymbol() const { return symbol; }
 
+// Setters
+void objPos::setPosition(int x, int y) {  // Implement this method
+    this->x = x;
+    this->y = y;
+}
+
 // Print Method
 void objPos::print() const {
     std::cout << "Position: (" << x << ", " << y << ") Symbol: " << symbol << std::endl;
