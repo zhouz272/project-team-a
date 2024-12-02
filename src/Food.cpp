@@ -1,27 +1,21 @@
 #include "../include/Food.h"
 
-#include <cstdlib>  // For rand()
-#include <ctime>    // For time()
-
-#include "../include/objPosArrayList.h"  // Include this for objPosArrayList
+#include <cstdlib>  // for rand()
+#include <ctime>    // for time()
 
 // Constructor
 Food::Food() : foodPosition(0, 0, '*'), foodSymbol('*') {
-    // Seed random number generator
-    std::srand(std::time(nullptr));
+    std::srand(std::time(nullptr));  // Random number generator
 }
 
-// Generate new food at a random position
-void Food::generate(int boardWidth, int boardHeight, const objPosArrayList& snakeBody) {
+// Generate a new random position for the food
+void Food::generate(int boardWidth, int boardHeight, const objPosArrayList &snakeBody) {
     bool validPosition = false;
 
     while (!validPosition) {
         int randomX = std::rand() % boardWidth;
         int randomY = std::rand() % boardHeight;
 
-        foodPosition.setPosition(randomX, randomY);
-
-        // Check if the position overlaps with the snake
         validPosition = true;
         for (int i = 0; i < snakeBody.getSize(); ++i) {
             if (snakeBody.getElement(i).getX() == randomX &&
@@ -30,15 +24,19 @@ void Food::generate(int boardWidth, int boardHeight, const objPosArrayList& snak
                 break;
             }
         }
+
+        if (validPosition) {
+            foodPosition.setPosition(randomX, randomY);  // Use setPosition to update position
+        }
     }
 }
 
-// Get food position
+// Get the food's position
 objPos Food::getPosition() const {
     return foodPosition;
 }
 
-// Get food symbol
+// Get the food's symbol
 char Food::getSymbol() const {
     return foodSymbol;
 }

@@ -1,26 +1,29 @@
 #ifndef OBJPOS_H
 #define OBJPOS_H
 
+#include <iostream>
+
 class objPos {
    private:
-    int x, y;
+    int x;
+    int y;
     char symbol;
 
    public:
     objPos();
     objPos(int x, int y, char symbol);
-    ~objPos();
 
-    // Getters
     int getX() const;
     int getY() const;
     char getSymbol() const;
 
-    // Setters
-    void setPosition(int x, int y);  // Add this method
+    void setX(int newX);
+    void setY(int newY);
+    void setSymbol(char newSymbol);
 
-    // Print Method
+    void setPosition(int newX, int newY);
+
     void print() const;
 };
 
-#endif  // OBJPOS_H
+#endif
